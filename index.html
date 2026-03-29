@@ -36,13 +36,20 @@
 
         .container { max-width: 850px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        h1 { font-size: 1.6em; font-weight: 300; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; color: var(--sage); }
+        h1 { 
+            font-size: 1.6em; 
+            font-weight: 300; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            margin-top: 40px; 
+            color: var(--sage);
+        }
 
         .box-orientacoes {
             background: var(--cor-base);
             border: var(--borda);
             border-radius: 20px;
-            padding: 30px;
+            padding: 35px;
             margin-bottom: 30px;
             line-height: 1.8;
             color: var(--texto-apoio);
@@ -53,7 +60,7 @@
             font-style: italic; 
             color: var(--sage); 
             display: block; 
-            margin-top: 20px; 
+            margin-top: 25px; 
             font-weight: 600;
             padding: 15px;
             background: #f1f5f2;
@@ -75,30 +82,32 @@
             letter-spacing: 2px;
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(90, 127, 102, 0.2);
+            z-index: 100;
         }
 
         button:hover { background: #4A6B54; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(90, 127, 102, 0.3); }
 
         .hidden { display: none !important; }
 
-        /* Palco das Cartas Melhorado */
+        /* Palco das Cartas com Altura Fixa para não sumir */
         #palco { 
             position: relative; 
             width: 100%; 
-            height: 350px; 
-            margin: 40px 0; 
+            height: 380px; 
+            margin: 20px 0; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             perspective: 2000px; 
         }
         
+        /* Design das Cartas Premium */
         .carta { 
             position: absolute; 
-            width: 110px; 
-            height: 185px; 
+            width: 120px; 
+            height: 205px; 
             cursor: pointer; 
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); 
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1); 
             transform-style: preserve-3d; 
         }
         
@@ -108,11 +117,11 @@
             height: 100%; 
             backface-visibility: hidden; 
             border-radius: 12px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08); 
             overflow: hidden; 
         }
         
-        /* Verso da Carta com Design Floral Minimalista */
+        /* Verso da Carta Zen Realista */
         .verso { 
             background: #fff; 
             border: 1px solid #e0e0e0; 
@@ -124,18 +133,19 @@
         
         .verso::after {
             content: "🌿";
-            font-size: 2em;
+            font-size: 2.5em;
             opacity: 0.3;
         }
 
-        .frente { background: #fff; transform: rotateY(180deg); }
+        .frente { background: #fff; transform: rotateY(180deg); border: 1px solid var(--dourado-suave); }
         .frente img { width: 100%; height: 100%; object-fit: cover; }
 
         .mesa { display: flex; justify-content: center; margin-top: 20px; }
         
+        /* Slot Realista com Borda Dourada */
         .slot { 
-            width: 130px; 
-            height: 205px; 
+            width: 140px; 
+            height: 225px; 
             border: 1px solid var(--dourado-suave); 
             border-radius: 15px; 
             padding: 5px; 
@@ -165,8 +175,8 @@
         .secao-titulo { color: var(--sage); font-weight: 600; margin-top: 30px; display: block; font-size: 1.1em; margin-bottom: 10px; }
         .recado-alma { font-style: italic; background: #F1F5F2; padding: 30px; border-radius: 15px; margin-top: 35px; border-left: 4px solid var(--sage); color: var(--texto-principal); line-height: 1.8; }
 
-        #modal-zoom { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.98); justify-content: center; align-items: center; cursor: zoom-out; }
-        #modal-zoom img { max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 2px solid var(--dourado-suave); }
+        #modal-zoom { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.98); justify-content: center; align-items: center; cursor: zoom-out; }
+        #modal-zoom img { max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 2px solid var(--dourado-suave); }
         
         footer { margin-top: 60px; padding: 20px; font-size: 0.75em; color: var(--texto-apoio); }
     </style>
@@ -179,13 +189,13 @@
     <div id="instrucoes" class="box-orientacoes">
         <h2>Momento de Conexão</h2>
         Respire fundo três vezes, relaxe e solte as tensões do corpo. 
-        <span class="pergunta-mentalizar">"O que eu preciso saber hoje para o meu equilíbrio e evolução?"</span>
+        <span class="pergunta-mentalizar">"O que eu preciso saber nesse momento para o meu equilíbrio e evolução?"</span>
     </div>
 
     <div class="controles">
         <button id="btn-embaralhar" onclick="fluxoResetMisturar()">Misturar e Jogar</button>
         <button id="btn-escolher" class="hidden" onclick="abrirLeque()">Distribuir Cartas</button>
-        <h2 id="msg-escolha" class="hidden" style="color: var(--sage); font-weight: 400; font-size: 1.1em;">Escolha a carta que chama sua alma...</h2>
+        <h2 id="msg-escolha" class="hidden" style="color: var(--texto-apoio); font-weight: 300;">Escolha a carta que chama sua intuição...</h2>
     </div>
 
     <div id="palco"></div>
@@ -209,29 +219,30 @@
 </div>
 
 <script>
+// LÓGICA VALIDADA COM AS 22 CARTAS TOTAIS
 const baralhoMaster = [
-    { n: "0. O Louco", img: "imagens/O_O_LOUCO.webp", txt: "Momento de novos começos e saltos de fé. <br><div class='recado-alma'>Confie no seu instinto.</div>" },
-    { n: "I. O Mago", img: "imagens/I_O_MAGO.webp", txt: "Você tem todas as ferramentas para manifestar sua realidade. <br><div class='recado-alma'>Aja com intenção.</div>" },
-    { n: "II. A Sacerdotisa", img: "imagens/II_A_SACERDOTISA.webp", txt: "Siga sua intuição e o silêncio da alma. <br><div class='recado-alma'>As respostas estão dentro.</div>" },
-    { n: "III. A Imperatriz", img: "imagens/III_A_IMPERATRIZ.webp", txt: "Abundância, criatividade e nutrição. <br><div class='recado-alma'>Deixe a vida florescer.</div>" },
-    { n: "IV. O Imperador", img: "imagens/IV_O_IMPERADOR.webp", txt: "Estrutura, foco e autoridade pessoal. <br><div class='recado-alma'>Construa seu império.</div>" },
-    { n: "V. O Hierofante", img: "imagens/V_O_HIEROFANTE.webp", txt: "Sabedoria tradicional e ética. <br><div class='recado-alma'>Conecte-se com o sagrado.</div>" },
-    { n: "VI. Os Enamorados", img: "imagens/VI_OS_ENAMORADOS.webp", txt: "Escolhas feitas pelo coração. <br><div class='recado-alma'>A união traz força.</div>" },
-    { n: "VII. O Carro", img: "imagens/VII_O_CARRO.webp", txt: "Vitória através da determinação. <br><div class='recado-alma'>Assuma as rédeas.</div>" },
-    { n: "VIII. A Justiça", img: "imagens/VIII_A_JUSTIÇA.webp", txt: "Equilíbrio e verdade. <br><div class='recado-alma'>Colha o que plantou.</div>" },
-    { n: "IX. O Eremita", img: "imagens/IX_O_HEREMITA.webp", txt: "Introspecção e busca interior. <br><div class='recado-alma'>A luz está no silêncio.</div>" },
-    { n: "X. A Roda da Fortuna", img: "imagens/X_A_RODA_DA_FORTUNA.webp", txt: "Mudanças de ciclo e destino. <br><div class='recado-alma'>Aceite o fluxo da vida.</div>" },
-    { n: "XI. A Força", img: "imagens/XI_A_FORÇA.webp", txt: "Coragem mansa e autodomínio. <br><div class='recado-alma'>A doçura vence o medo.</div>" },
-    { n: "XII. O Pendurado", img: "imagens/XII_O_PENDURADO.webp", txt: "Nova perspectiva através da pausa. <br><div class='recado-alma'>Solte o controle.</div>" },
-    { n: "XIII. A Morte", img: "imagens/XIII_A_MORTE.webp", txt: "Renascimento e desapego. <br><div class='recado-alma'>O fim é um novo começo.</div>" },
-    { n: "XIV. A Temperança", img: "imagens/XIV_A_TEMPERANÇA.webp", txt: "Harmonia, cura e moderação. <br><div class='recado-alma'>Misture com equilíbrio.</div>" },
-    { n: "XV. O Diabo", img: "imagens/XV_O_DIABO.webp", txt: "Encare seus apegos e sombras. <br><div class='recado-alma'>A chave está na sua mão.</div>" },
-    { n: "XVI. A Torre", img: "imagens/XVI_A_TORRE.webp", txt: "Libertação súbita de estruturas falsas. <br><div class='recado-alma'>Construa sobre a verdade.</div>" },
-    { n: "XVII. A Estrela", img: "imagens/XVII_A_ESTRELA.webp", txt: "Esperança e luz no caminho. <br><div class='recado-alma'>Confie no universo.</div>" },
-    { n: "XVIII. A Lua", img: "imagens/XVIII_A_LUA.webp", txt: "Intuição e mistérios do subconsciente. <br><div class='recado-alma'>Navegue pela névoa.</div>" },
-    { n: "XIX. O Sol", img: "imagens/XIX_O_SOL.webp", txt: "Sucesso, clareza e alegria. <br><div class='recado-alma'>Brilhe sua verdade.</div>" },
-    { n: "XX. O Julgamento", img: "imagens/XX_O_JULGAMENTO.webp", txt: "Despertar para uma nova consciência. <br><div class='recado-alma'>Perdoe-se e renasça.</div>" },
-    { n: "XXI. O Mundo", img: "imagens/XXI_O_MUNDO.webp", txt: "Conclusão de ciclo e plenitude. <br><div class='recado-alma'>Você chegou ao seu centro.</div>" }
+    { n: "0. O Louco", img: "imagens/O_O_LOUCO.webp", txt: "Momento de novos começos e saltos de fé. <br><div class='recado-alma'>Confie no seu instinto e dê o passo.</div>" },
+    { n: "I. O Mago", img: "imagens/I_O_MAGO.webp", txt: "Você tem todas as ferramentas necessárias para manifestar sua realidade. <br><div class='recado-alma'>Use sua força de vontade agora.</div>" },
+    { n: "II. A Sacerdotisa", img: "imagens/II_A_SACERDOTISA.webp", txt: "A intuição está aflorada. Guarde seus planos em silêncio por enquanto. <br><div class='recado-alma'>Ouça a voz que vem de dentro.</div>" },
+    { n: "III. A Imperatriz", img: "imagens/III_A_IMPERATRIZ.webp", txt: "Abundância, nutrição e criatividade em expansão. <br><div class='recado-alma'>Deixe a vida florescer através de você.</div>" },
+    { n: "IV. O Imperador", img: "imagens/IV_O_IMPERADOR.webp", txt: "Estrutura, lógica e autoridade pessoal são necessárias hoje. <br><div class='recado-alma'>Organize seu mundo com firmeza.</div>" },
+    { n: "V. O Hierofante", img: "imagens/V_O_HIEROFANTE.webp", txt: "Sabedoria, ética e busca por conhecimento superior. <br><div class='recado-alma'>Siga seus valores e princípios.</div>" },
+    { n: "VI. Os Enamorados", img: "imagens/VI_OS_ENAMORADOS.webp", txt: "Escolhas feitas pelo coração e alinhamento de valores. <br><div class='recado-alma'>Decida com amor e autenticidade.</div>" },
+    { n: "VII. O Carro", img: "imagens/VII_O_CARRO.webp", txt: "Vitória através do foco e da determinação. <br><div class='recado-alma'>Assuma as rédeas do seu destino.</div>" },
+    { n: "VIII. A Justiça", img: "imagens/VIII_A_JUSTIÇA.webp", txt: "Equilíbrio, verdade e colheita justa do que foi plantado. <br><div class='recado-alma'>Aja com integridade absoluta.</div>" },
+    { n: "IX. O Eremita", img: "imagens/IX_O_HEREMITA.webp", txt: "Momento de introspecção e busca pela luz interior. <br><div class='recado-alma'>O silêncio trará a resposta.</div>" },
+    { n: "X. A Roda da Fortuna", img: "imagens/X_A_RODA_DA_FORTUNA.webp", txt: "Mudanças de ciclo e movimento inesperado do destino. <br><div class='recado-alma'>Aceite o fluxo do universo.</div>" },
+    { n: "XI. A Força", img: "imagens/XI_A_FORÇA.webp", txt: "Coragem mansa e autodomínio sobre os impulsos. <br><div class='recado-alma'>Domine seus medos com gentileza.</div>" },
+    { n: "XII. O Pendurado", img: "imagens/XII_O_PENDURADO.webp", txt: "Nova perspectiva através da pausa e do sacrifício amoroso. <br><div class='recado-alma'>Solte o controle para enxergar melhor.</div>" },
+    { n: "XIII. A Morte", img: "imagens/XIII_A_MORTE.webp", txt: "Fim de um ciclo para que o novo possa nascer. <br><div class='recado-alma'>Desapegue do que não serve mais.</div>" },
+    { n: "XIV. A Temperança", img: "imagens/XIV_A_TEMPERANÇA.webp", txt: "Cura, paciência e harmonia entre os opostos. <br><div class='recado-alma'>Busque o caminho do meio.</div>" },
+    { n: "XV. O Diabo", img: "imagens/XV_O_DIABO.webp", txt: "Encare seus apegos e as correntes que você mesmo criou. <br><div class='recado-alma'>A liberdade começa na consciência.</div>" },
+    { n: "XVI. A Torre", img: "imagens/XVI_A_TORRE.webp", txt: "Libertação súbita de estruturas falsas e ultrapassadas. <br><div class='recado-alma'>Deixe cair o que não tem base real.</div>" },
+    { n: "XVII. A Estrela", img: "imagens/XVII_A_ESTRELA.webp", txt: "Esperança renovada e inspiração divina. <br><div class='recado-alma'>Sua luz está sendo guiada pelo céu.</div>" },
+    { n: "XVIII. A Lua", img: "imagens/XVIII_A_LUA.webp", txt: "Navegação por mistérios, intuição e subconsciente. <br><div class='recado-alma'>Nem tudo é o que parece, ouça o instinto.</div>" },
+    { n: "XIX. O Sol", img: "imagens/XIX_O_SOL.webp", txt: "Sucesso, clareza total e alegria de ser quem você é. <br><div class='recado-alma'>Brilhe sem medo, o dia é seu.</div>" },
+    { n: "XX. O Julgamento", img: "imagens/XX_O_JULGAMENTO.webp", txt: "Despertar para uma nova vida e prestação de contas espiritual. <br><div class='recado-alma'>Perdoe o passado e renasça.</div>" },
+    { n: "XXI. O Mundo", img: "imagens/XXI_O_MUNDO.webp", txt: "Conclusão bem-sucedida, plenitude e integração total. <br><div class='recado-alma'>Você chegou onde precisava estar.</div>" }
 ];
 
 let cartasEscolhidasCount = 0;
@@ -258,13 +269,11 @@ async function fluxoResetMisturar() {
     document.getElementById('btn-embaralhar').classList.add('hidden');
     document.getElementById('instrucoes').classList.add('hidden');
     const cartas = document.querySelectorAll('.carta');
-    
-    // Animação de Mistura mais orgânica
     for(let j=0; j<2; j++) {
         cartas.forEach(c => {
             const rx = (Math.random()-0.5)*350;
-            const ry = (Math.random()-0.5)*80;
-            c.style.transform = `translate(${rx}px, ${ry}px) rotate(${(Math.random()-0.5)*40}deg)`;
+            const ry = (Math.random()-0.5)*100;
+            c.style.transform = `translate(${rx}px, ${ry}px) rotate(${(Math.random()-0.5)*60}deg)`;
         });
         await new Promise(r => setTimeout(r, 500));
     }
@@ -275,16 +284,13 @@ async function fluxoResetMisturar() {
 
 function abrirLeque() {
     const cartas = document.querySelectorAll('.carta');
-    const palcoWidth = document.getElementById('palco').offsetWidth;
-    const containerWidth = palcoWidth > 600 ? 550 : palcoWidth * 0.9;
+    const containerWidth = document.getElementById('palco').offsetWidth * 0.85;
     const step = containerWidth / (cartas.length - 1);
-    
     cartas.forEach((c, i) => {
         const x = (i * step) - (containerWidth / 2);
-        const rot = (i - (cartas.length / 2)) * 1.2; 
+        const rot = (i - (cartas.length / 2)) * 1.5; 
         c.style.transform = `translateX(${x}px) rotate(${rot}deg)`;
     });
-    
     document.getElementById('btn-escolher').classList.add('hidden');
     document.getElementById('msg-escolha').classList.remove('hidden');
 }
@@ -315,3 +321,12 @@ function abrirZoom(src) {
     document.getElementById('img-ampliada').src = src;
     document.getElementById('modal-zoom').style.display = "flex";
 }
+
+function fecharZoom() {
+    document.getElementById('modal-zoom').style.display = "none";
+}
+
+window.onload = inicializarBaralho;
+</script>
+</body>
+</html>
