@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarot Terapêutico - Seu Guia Diário</title>
+    <title>Tarot Terapêutico - Guia Diário</title>
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Nova Paleta Zen e Minimalista */
-            --fundo-geral: #F8F9FA; 
-            --branco-puro: #ffffff;
-            --texto-principal: #333333; 
-            --texto-suave: #636E72;
-            --sage: #5A7F66; /* Verde Sálvia */
-            --dourado: #C5A059; /* Dourado Sutil */
-            --sombra-premium: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --fundo-geral: #F8F9FA;
+            --cor-base: #ffffff;
+            --texto-principal: #2D3436;
+            --texto-apoio: #636E72;
+            --sage: #5A7F66;
+            --dourado-suave: #C5A059;
+            --sombra: 0 10px 30px rgba(0,0,0,0.05);
+            --borda: 1px solid #E9ECEF;
         }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background: var(--fundo-geral); 
+            background-color: var(--fundo-geral); 
             color: var(--texto-principal); 
             margin: 0; 
             padding-bottom: 50px; 
@@ -34,149 +34,141 @@
             align-items: center;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; text-align: center; }
+        .container { max-width: 850px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        /* Título Sem Emoji e Minimalista */
-        h1 { 
-            font-size: 1.8em; 
-            font-weight: 300; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            color: var(--sage); 
-            margin-top: 40px; 
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 15px;
-            display: inline-block;
-        }
+        h1 { font-size: 1.6em; font-weight: 300; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; color: var(--sage); }
 
-        /* Caixa de Orientações Clean */
         .box-orientacoes {
-            background: var(--branco-puro);
-            border: 1px solid #eee;
+            background: var(--cor-base);
+            border: var(--borda);
             border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
+            padding: 30px;
+            margin-bottom: 30px;
             line-height: 1.8;
-            color: var(--texto-suave);
-            box-shadow: var(--sombra-premium);
-            text-align: left;
+            color: var(--texto-apoio);
+            box-shadow: var(--sombra);
         }
-
-        .box-orientacoes h2 { color: var(--sage); font-weight: 400; margin-top: 0; }
 
         .pergunta-mentalizar { 
             font-style: italic; 
             color: var(--sage); 
             display: block; 
-            margin-top: 25px; 
+            margin-top: 20px; 
             font-weight: 600;
-            padding: 20px;
-            background: #f1f3f1;
-            border-radius: 12px;
+            padding: 15px;
+            background: #f1f5f2;
+            border-radius: 10px;
         }
 
-        .controles { margin: 20px 0; min-height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; }
+        .controles { margin: 20px 0; min-height: 110px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
 
-        /* Botão Verde Sálvia e Dourado */
         button { 
             background: var(--sage);
-            color: var(--branco-puro); 
-            border: 1px solid var(--dourado); 
-            padding: 18px 55px; 
+            color: #fff; 
+            border: 1px solid var(--dourado-suave); 
+            padding: 16px 45px; 
             font-size: 1em;
             cursor: pointer; 
             border-radius: 50px; 
             font-weight: 600;
             text-transform: uppercase; 
             letter-spacing: 2px;
-            transition: 0.3s ease; 
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(90, 127, 102, 0.2);
-            z-index: 100;
         }
 
-        button:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 20px rgba(90, 127, 102, 0.3);
-            background: #4A6B54;
-        }
+        button:hover { background: #4A6B54; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(90, 127, 102, 0.3); }
 
         .hidden { display: none !important; }
 
-        /* Palco e Cartas Estilo Premium */
-        #palco { position: relative; width: 100%; height: 380px; margin: 20px 0; display: flex; justify-content: center; align-items: center; perspective: 2000px; }
+        /* Palco das Cartas Melhorado */
+        #palco { 
+            position: relative; 
+            width: 100%; 
+            height: 350px; 
+            margin: 40px 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            perspective: 2000px; 
+        }
         
-        .carta { position: absolute; width: 130px; height: 215px; cursor: pointer; transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1); transform-style: preserve-3d; }
+        .carta { 
+            position: absolute; 
+            width: 110px; 
+            height: 185px; 
+            cursor: pointer; 
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); 
+            transform-style: preserve-3d; 
+        }
         
-        .face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); overflow: hidden; }
+        .face { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            backface-visibility: hidden; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+        }
         
-        /* Verso da Carta Minimalista (Folhas/Zen) */
+        /* Verso da Carta com Design Floral Minimalista */
         .verso { 
-            background: var(--branco-puro); 
-            border: 1px solid var(--sage); 
+            background: #fff; 
+            border: 1px solid #e0e0e0; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 1.5em; 
             color: var(--sage);
         }
         
-        /* Simulação de um ícone minimalista no verso */
-        .verso::before { content: "🌿"; opacity: 0.4; }
+        .verso::after {
+            content: "🌿";
+            font-size: 2em;
+            opacity: 0.3;
+        }
 
-        .frente { background: var(--branco-puro); transform: rotateY(180deg); }
+        .frente { background: #fff; transform: rotateY(180deg); }
         .frente img { width: 100%; height: 100%; object-fit: cover; }
 
-        .mesa { display: flex; justify-content: center; margin-top: 30px; }
+        .mesa { display: flex; justify-content: center; margin-top: 20px; }
         
-        /* Slot da Carta com Destaque Realista */
         .slot { 
-            width: 150px; 
-            height: 240px; 
-            border: 1px solid var(--dourado); 
+            width: 130px; 
+            height: 205px; 
+            border: 1px solid var(--dourado-suave); 
             border-radius: 15px; 
             padding: 5px; 
-            background: var(--branco-puro); 
+            background: #fff; 
             display: flex; 
             flex-direction: column; 
             align-items: center;
-            box-shadow: var(--sombra-premium);
+            box-shadow: var(--sombra);
         }
 
-        /* Área de Mensagem Terapêutica */
         #analise { 
-            max-width: 800px; 
-            margin: 50px auto; 
-            padding: 45px; 
-            background: var(--branco-puro); 
-            border-radius: 25px; 
-            border: 1px solid #eee; 
+            max-width: 750px; 
+            margin: 40px auto; 
+            padding: 40px; 
+            background: #fff; 
+            border-radius: 20px; 
+            border: var(--borda); 
             text-align: left; 
             display: none; 
-            box-shadow: var(--sombra-premium); 
+            box-shadow: var(--sombra); 
             animation: fadeIn 0.8s ease; 
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        .mensagem-tarot h3 { color: var(--sage); border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; font-size: 1.6em; margin-bottom: 25px; font-weight: 400; text-align: center;}
-        
-        .secao-titulo { color: var(--sage); font-weight: 600; margin-top: 30px; display: block; font-size: 1.1em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .recado-alma { 
-            font-style: italic; 
-            background: #f8faf8; 
-            padding: 30px; 
-            border-radius: 15px; 
-            margin-top: 40px; 
-            border-left: 5px solid var(--sage); 
-            color: var(--texto-principal); 
-            line-height: 1.8; 
-        }
+        .mensagem-tarot h3 { color: var(--sage); font-weight: 400; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; font-size: 1.4em; margin-bottom: 25px; text-align: center; }
+        .secao-titulo { color: var(--sage); font-weight: 600; margin-top: 30px; display: block; font-size: 1.1em; margin-bottom: 10px; }
+        .recado-alma { font-style: italic; background: #F1F5F2; padding: 30px; border-radius: 15px; margin-top: 35px; border-left: 4px solid var(--sage); color: var(--texto-principal); line-height: 1.8; }
 
         #modal-zoom { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.98); justify-content: center; align-items: center; cursor: zoom-out; }
-        #modal-zoom img { max-height: 85vh; border-radius: 15px; border: 3px solid var(--dourado); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        #modal-zoom img { max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 2px solid var(--dourado-suave); }
         
-        footer { margin-top: 80px; padding: 20px; font-size: 0.8em; color: var(--texto-suave); letter-spacing: 1px; }
+        footer { margin-top: 60px; padding: 20px; font-size: 0.75em; color: var(--texto-apoio); }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -187,26 +179,25 @@
     <div id="instrucoes" class="box-orientacoes">
         <h2>Momento de Conexão</h2>
         Respire fundo três vezes, relaxe e solte as tensões do corpo. 
-        <br><br>Após as respirações, abra os olhos e mentalize a pergunta:
-        <span class="pergunta-mentalizar">"O que eu preciso saber nesse momento sobre o meu dia de hoje, qual é o foco principal do meu dia, que desafio eu poderei estar enfrentando e qual a minha melhor ação para o dia de hoje?"</span>
+        <span class="pergunta-mentalizar">"O que eu preciso saber hoje para o meu equilíbrio e evolução?"</span>
     </div>
 
     <div class="controles">
         <button id="btn-embaralhar" onclick="fluxoResetMisturar()">Misturar e Jogar</button>
         <button id="btn-escolher" class="hidden" onclick="abrirLeque()">Distribuir Cartas</button>
-        <h2 id="msg-escolha" class="hidden" style="color: var(--texto-suave); font-weight: 300;">Escolha a carta que mais atrai sua intuição...</h2>
+        <h2 id="msg-escolha" class="hidden" style="color: var(--sage); font-weight: 400; font-size: 1.1em;">Escolha a carta que chama sua alma...</h2>
     </div>
 
     <div id="palco"></div>
 
     <div class="mesa">
         <div class="slot" id="slot-1">
-            <div style="font-size: 0.75em; color: var(--sage); margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Sua Energia</div>
+            <div style="font-size: 0.7em; color: var(--sage); margin-bottom: 10px; text-transform: uppercase; font-weight: 600;">Sua Energia</div>
         </div>
     </div>
 
     <div id="analise">
-        <p style="text-align: center; color: #bbb; font-size: 0.85em; margin-bottom: 25px;">(Toque na carta acima para ampliar)</p>
+        <p style="text-align: center; color: #bbb; font-size: 0.8em; margin-bottom: 25px;">(Toque na carta para ampliar)</p>
         <div class="mensagem-tarot" id="txt-conselho"></div>
     </div>
 
@@ -218,13 +209,29 @@
 </div>
 
 <script>
-// A Lógica permanece intocada para garantir o funcionamento
 const baralhoMaster = [
-    { n: "0. O Louco: \"O Salto da Fé\"", img: "imagens/O_O_LOUCO.webp", txt: "Sabe aquele frio na barriga de quando a gente está prestes a fazer algo totalmente novo? É exatamente essa a energia que vai guiar o seu espírito nas próximas 24 horas.<br><br><span class='secao-titulo'>A Energia do seu Espírito:</span> Hoje, seu espírito está livre de amarras. Ele não quer saber de planos complicados, de passado ou de \"e se der errado?\". A energia dominante é a da pureza e da entrega. O Louco na escola inglesa nos ensina que, para o espírito, o risco não existe, existe apenas a experiência. Você está no \"ponto zero\", onde tudo é possível.<br><br><span class='secao-titulo'>O Conselho para o seu Dia:</span><br>• <strong>Confie no invisível:</strong> Se surgir uma oportunidade ou um impulso de fazer algo diferente, não tente racionalizar demais. Seu espírito está te pedindo um voto de confiança.<br>• <strong>Caminhe com leveza:</strong> Não carregue pesos que não são seus. Hoje é dia de viajar com a \"mochila leve\".<br>• <strong>Esteja no agora:</strong> O Louco não olha para trás. Viva o dia de hoje como se fosse um papel em branco. Se sentir vontade de rir do nada ou mudar o caminho de volta para casa, faça isso!<br><div class='recado-alma'><strong>O recado da alma:</strong> \"Vá até a beira do precipício com um sorriso. O universo vai colocar o chão sob seus pés assim que você der o passo.\"</div>" },
-    // ... (As outras cartas seguem o mesmo padrão)
-    { n: "I. O Mago: \"O Alquimista da Realidade\"", img: "imagens/I_O_MAGO.webp", txt: "Sabe aqueles dias em que você sente que todas as peças do quebra-cabeça estão na sua mão e que, se você dar o primeiro passo, o caminho vai se abrir como mágica? Como se você tivesse um \"superpoder\" de transformar uma ideia em algo real? Essa é a energia vibrante e cheia de recursos do Mago que vai impulsionar o seu espírito nas próximas 24 horas.<br><br><span class='secao-titulo'>A Energia do seu Espírito:</span> Hoje, seu espírito está em modo \"eu posso e eu faço\". A energia dominante é a da força de vontade e do potencial infinito. Na escola inglesa, o Mago tem sobre a mesa todos os quatro elementos (a taça, a espada, o ouro e o bastão), o que significa que você já tem tudo o que precisa para fazer o que quer. Seu espírito não está mais apenas sonhando; ele está pronto para agir com intenção. É um momento de foco, agilidade mental e muita capacidade de comunicação.<br><br><span class='secao-titulo'>O Conselho para o seu Dia:</span><br>• <strong>Use as ferramentas que você já tem:</strong> Não espere pelo \"momento perfeito\". Use o que está à mão agora. Você é muito mais capacitado do que imagina.<br>• <strong>Foque na sua intenção:</strong> Onde você colocar a sua atenção hoje, a energia vai fluir. Escolha um objetivo claro e direcione sua vontade para ele. O universo está pronto para dizer \"sim\" para a sua iniciativa.<br>• <strong>Comunique-se com clareza:</strong> Hoje é um excelente dia para vender uma ideia ou negociar algo. Sua fala está carregada de um magnetismo que convence e encanta.<br>• <strong>Dê o primeiro passo:</strong> O Mago inicia processos. Se existe algo que você está adiando, use a energia de hoje para apenas começar. O movimento gera movimento.<br><div class='recado-alma'><strong>O recado da alma:</strong> \"O poder está nas suas mãos, literalmente. Você é o canal entre o que você imagina e o que o mundo vê. Acredite na sua magia.\"</div>" },
-    { n: "II. A Sacerdotisa: \"O Silêncio que Tudo Sabe\"", img: "imagens/II_A_SACERDOTISA.webp", txt: "Sabe aqueles dias em que a gente sente que existe algo a mais acontecendo \"nas entrelinhas\"? Essa é a energia da Sacerdotisa que vai abraçar o seu espírito nas próximas 24 horas.<br><br><span class='secao-titulo'>A Energia do seu Espírito:</span> Hoje, seu espírito não quer barulho, ele quer profundidade. A energia dominante é a da intuição pura e do mistério. Na escola inglesa, a Sacerdotisa representa aquele conhecimento que vem do silêncio da alma. Seu espírito está agindo como um lago calmo e profundo: ele está captando tudo e sentindo as vibrações. É um momento de pausa sagrada entre o pensar e o agir.<br><br><span class='secao-titulo'>O Conselho para o seu Dia:</span><br>• <strong>Ouça a sua voz interior:</strong> Se você sentir um \"aperto\" ou um \"alívio\" inexplicável, confie. Sua intuição está mais afiada do que nunca.<br>• <strong>Não tenha pressa de decidir:</strong> O mundo pode estar te cobrando respostas, mas a Sacerdotisa diz: \"Ainda não\". Algumas coisas precisam amadurecer no escuro.<br>• <strong>Observe os sinais:</strong> Preste atenção aos seus sonhos ou a pensamentos que surgem do nada. O universo está tentando falar com você através de símbolos.<br>• <strong>Mantenha o seu mistério:</strong> Você não precisa contar todos os seus planos hoje. Guardar a sua energia para si mesma vai te dar uma força imensa.<br><div class='recado-alma'><strong>O recado da alma:</strong> \"Feche os olhos para enxergar melhor. A resposta que você busca não está no mundo lá fora, mas no silêncio que mora dentro de você.\"</div>" }
-    // Obs: Adicione as outras 20 cartas conforme o padrão para completar o código.
+    { n: "0. O Louco", img: "imagens/O_O_LOUCO.webp", txt: "Momento de novos começos e saltos de fé. <br><div class='recado-alma'>Confie no seu instinto.</div>" },
+    { n: "I. O Mago", img: "imagens/I_O_MAGO.webp", txt: "Você tem todas as ferramentas para manifestar sua realidade. <br><div class='recado-alma'>Aja com intenção.</div>" },
+    { n: "II. A Sacerdotisa", img: "imagens/II_A_SACERDOTISA.webp", txt: "Siga sua intuição e o silêncio da alma. <br><div class='recado-alma'>As respostas estão dentro.</div>" },
+    { n: "III. A Imperatriz", img: "imagens/III_A_IMPERATRIZ.webp", txt: "Abundância, criatividade e nutrição. <br><div class='recado-alma'>Deixe a vida florescer.</div>" },
+    { n: "IV. O Imperador", img: "imagens/IV_O_IMPERADOR.webp", txt: "Estrutura, foco e autoridade pessoal. <br><div class='recado-alma'>Construa seu império.</div>" },
+    { n: "V. O Hierofante", img: "imagens/V_O_HIEROFANTE.webp", txt: "Sabedoria tradicional e ética. <br><div class='recado-alma'>Conecte-se com o sagrado.</div>" },
+    { n: "VI. Os Enamorados", img: "imagens/VI_OS_ENAMORADOS.webp", txt: "Escolhas feitas pelo coração. <br><div class='recado-alma'>A união traz força.</div>" },
+    { n: "VII. O Carro", img: "imagens/VII_O_CARRO.webp", txt: "Vitória através da determinação. <br><div class='recado-alma'>Assuma as rédeas.</div>" },
+    { n: "VIII. A Justiça", img: "imagens/VIII_A_JUSTIÇA.webp", txt: "Equilíbrio e verdade. <br><div class='recado-alma'>Colha o que plantou.</div>" },
+    { n: "IX. O Eremita", img: "imagens/IX_O_HEREMITA.webp", txt: "Introspecção e busca interior. <br><div class='recado-alma'>A luz está no silêncio.</div>" },
+    { n: "X. A Roda da Fortuna", img: "imagens/X_A_RODA_DA_FORTUNA.webp", txt: "Mudanças de ciclo e destino. <br><div class='recado-alma'>Aceite o fluxo da vida.</div>" },
+    { n: "XI. A Força", img: "imagens/XI_A_FORÇA.webp", txt: "Coragem mansa e autodomínio. <br><div class='recado-alma'>A doçura vence o medo.</div>" },
+    { n: "XII. O Pendurado", img: "imagens/XII_O_PENDURADO.webp", txt: "Nova perspectiva através da pausa. <br><div class='recado-alma'>Solte o controle.</div>" },
+    { n: "XIII. A Morte", img: "imagens/XIII_A_MORTE.webp", txt: "Renascimento e desapego. <br><div class='recado-alma'>O fim é um novo começo.</div>" },
+    { n: "XIV. A Temperança", img: "imagens/XIV_A_TEMPERANÇA.webp", txt: "Harmonia, cura e moderação. <br><div class='recado-alma'>Misture com equilíbrio.</div>" },
+    { n: "XV. O Diabo", img: "imagens/XV_O_DIABO.webp", txt: "Encare seus apegos e sombras. <br><div class='recado-alma'>A chave está na sua mão.</div>" },
+    { n: "XVI. A Torre", img: "imagens/XVI_A_TORRE.webp", txt: "Libertação súbita de estruturas falsas. <br><div class='recado-alma'>Construa sobre a verdade.</div>" },
+    { n: "XVII. A Estrela", img: "imagens/XVII_A_ESTRELA.webp", txt: "Esperança e luz no caminho. <br><div class='recado-alma'>Confie no universo.</div>" },
+    { n: "XVIII. A Lua", img: "imagens/XVIII_A_LUA.webp", txt: "Intuição e mistérios do subconsciente. <br><div class='recado-alma'>Navegue pela névoa.</div>" },
+    { n: "XIX. O Sol", img: "imagens/XIX_O_SOL.webp", txt: "Sucesso, clareza e alegria. <br><div class='recado-alma'>Brilhe sua verdade.</div>" },
+    { n: "XX. O Julgamento", img: "imagens/XX_O_JULGAMENTO.webp", txt: "Despertar para uma nova consciência. <br><div class='recado-alma'>Perdoe-se e renasça.</div>" },
+    { n: "XXI. O Mundo", img: "imagens/XXI_O_MUNDO.webp", txt: "Conclusão de ciclo e plenitude. <br><div class='recado-alma'>Você chegou ao seu centro.</div>" }
 ];
 
 let cartasEscolhidasCount = 0;
@@ -251,27 +258,33 @@ async function fluxoResetMisturar() {
     document.getElementById('btn-embaralhar').classList.add('hidden');
     document.getElementById('instrucoes').classList.add('hidden');
     const cartas = document.querySelectorAll('.carta');
+    
+    // Animação de Mistura mais orgânica
     for(let j=0; j<2; j++) {
         cartas.forEach(c => {
-            const rx = (Math.random()-0.5)*300;
-            const ry = (Math.random()-0.5)*50;
-            c.style.transform = `translate(${rx}px, ${ry}px) rotate(${(Math.random()-0.5)*60}deg)`;
+            const rx = (Math.random()-0.5)*350;
+            const ry = (Math.random()-0.5)*80;
+            c.style.transform = `translate(${rx}px, ${ry}px) rotate(${(Math.random()-0.5)*40}deg)`;
         });
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 500));
     }
     cartas.forEach(c => c.style.transform = `translate(0,0) rotate(0deg)`);
+    await new Promise(r => setTimeout(r, 600));
     document.getElementById('btn-escolher').classList.remove('hidden');
 }
 
 function abrirLeque() {
     const cartas = document.querySelectorAll('.carta');
-    const containerWidth = document.getElementById('palco').offsetWidth * 0.9;
+    const palcoWidth = document.getElementById('palco').offsetWidth;
+    const containerWidth = palcoWidth > 600 ? 550 : palcoWidth * 0.9;
     const step = containerWidth / (cartas.length - 1);
+    
     cartas.forEach((c, i) => {
         const x = (i * step) - (containerWidth / 2);
-        const rot = (i - (cartas.length / 2)) * 0.8; 
+        const rot = (i - (cartas.length / 2)) * 1.2; 
         c.style.transform = `translateX(${x}px) rotate(${rot}deg)`;
     });
+    
     document.getElementById('btn-escolher').classList.add('hidden');
     document.getElementById('msg-escolha').classList.remove('hidden');
 }
@@ -285,26 +298,20 @@ function clicarNaCarta(el) {
     const pRect = document.getElementById('palco').getBoundingClientRect();
     const dX = (sRect.left + sRect.width/2) - (pRect.left + pRect.width/2);
     const dY = (sRect.top + sRect.height/2) - (pRect.top + pRect.height/2);
-    el.style.zIndex = 500;
-    el.style.transform = `translate(${dX}px, ${dY}px) rotateY(180deg) scale(1.15)`;
-    el.onclick = () => abrirZoom(info.img);
-    document.getElementById('analise').style.display = 'block';
-    document.getElementById('txt-conselho').innerHTML = `<h3>${info.n}</h3>${info.txt}`;
-    document.getElementById('btn-embaralhar').classList.remove('hidden');
-    document.getElementById('btn-embaralhar').innerText = "Nova Consulta";
-    document.getElementById('msg-escolha').classList.add('hidden');
+    
+    el.style.zIndex = 1000;
+    el.style.transform = `translate(${dX}px, ${dY}px) rotateY(180deg) scale(1.1)`;
+    
+    setTimeout(() => {
+        document.getElementById('analise').style.display = 'block';
+        document.getElementById('txt-conselho').innerHTML = `<h3>${info.n}</h3>${info.txt}`;
+        document.getElementById('btn-embaralhar').classList.remove('hidden');
+        document.getElementById('btn-embaralhar').innerText = "Reiniciar Tarot";
+        document.getElementById('msg-escolha').classList.add('hidden');
+    }, 800);
 }
 
 function abrirZoom(src) {
     document.getElementById('img-ampliada').src = src;
     document.getElementById('modal-zoom').style.display = "flex";
 }
-
-function fecharZoom() {
-    document.getElementById('modal-zoom').style.display = "none";
-}
-
-window.onload = inicializarBaralho;
-</script>
-</body>
-</html>
